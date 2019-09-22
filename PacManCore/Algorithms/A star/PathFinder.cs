@@ -63,8 +63,7 @@ namespace PacManLibrary.Algorithms.A_star
         {
             return Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y);
         }
-        private Collection<PathNode> GetNeighbours(PathNode pathNode,
-  Point goal, int[,] field)
+        private Collection<PathNode> GetNeighbours(PathNode pathNode, Point goal, int[,] field)
         {
             var result = new Collection<PathNode>();
 

@@ -27,7 +27,7 @@ namespace PacManLibrary.Model
         protected int timeToChase = 7000;
         protected int timeToSpin = 7000;
 
-        public GhostAbstract(GameContext context)
+        public GhostAbstract(IGameContext context)
         {
             this.character = context.PacMan;
             this.map = context.Map;

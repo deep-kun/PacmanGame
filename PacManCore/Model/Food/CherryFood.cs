@@ -7,7 +7,7 @@ namespace PacManLibrary.Model
         private const int itetatinToDisapper = 650;
         private readonly IPoint[,] map;
 
-        public CherryFood(GameContext context)
+        public CherryFood(IGameContext context)
         {
             this.map = context.Map;
         }

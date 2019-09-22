@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PacManCore.Model.Ghost;
+using PacManLibrary;
 
 namespace PacManWeb
 {
@@ -26,9 +28,12 @@ namespace PacManWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddSingleton<GameServies>();
+            services.AddTransient<Game>();
             services.AddSignalR();
             services.AddOptions();
-            services.AddSingleton<GameHub>();
+            services.AddTransient<GameHub>();
+            services.AddTransient<IGhostFactory, GhostFactory>();
+            services.AddScoped<IGameContext, GameContext>();
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
             builder =>

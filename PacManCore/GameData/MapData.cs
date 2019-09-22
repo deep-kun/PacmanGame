@@ -11,7 +11,7 @@ namespace PacManLibrary.GameData
         {
             IPoint[,] map = new IPoint[n, m];
             int k = 0;
-            var charArray = new DataSource().GetMap(@"C:\Users\deep\source\repos\PacMan\PacManLibrary\Stuff\map.txt");
+            var charArray = new DataSource().GetMap(@"C:\Users\deep\source\repos\PacMan\PacManCore\Stuff\map.txt");
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)

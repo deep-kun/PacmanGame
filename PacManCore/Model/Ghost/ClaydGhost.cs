@@ -13,7 +13,7 @@ namespace PacManLibrary.Model
         private int normalSpeed = 3;
 
 
-        public ClaydGhost(GameContext context)
+        public ClaydGhost(IGameContext context)
             : base(context)
         {
             HomePoint.X = homeX;
@@ -53,7 +53,6 @@ namespace PacManLibrary.Model
                 return new AbstractPoint(character.X, character.Y);
             }
             return new AbstractPoint(homeX, homeY);
-            //return new AbstractPoint(character.X, character.Y);
         }
     }
 }

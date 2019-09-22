@@ -9,11 +9,13 @@ namespace PacManWeb
 {
     public class GameHub : Hub
     {
+        private readonly Game newGame;
         private Game game;
         private Guid guid;
 
-        public GameHub(GameServies gameServies)
+        public GameHub(GameServies gameServies, Game newGame)
         {
+            this.newGame = newGame;
             games = gameServies.Games;
         }
         private readonly Dictionary<Guid, Game> games;
@@ -22,7 +24,7 @@ namespace PacManWeb
         {
             if (id == "0" || id == null)
             {
-                var game = new Game();
+                var game = newGame;
                 var guid = Guid.NewGuid();
                 this.guid = guid;
                 games.Add(guid, game);

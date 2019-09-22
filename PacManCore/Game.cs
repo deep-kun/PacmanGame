@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PacManCore.Model.Ghost;
 using PacManLibrary.Model;
 using PacManLibrary.Interfaces;
 using PacManLibrary.Events;
@@ -11,6 +12,7 @@ namespace PacManLibrary
 {
     public class Game
     {
+        private readonly IGhostFactory ghostFactory;
         private const int iteratinAppearSpeedy = 10;
         private const int n = 36;
         private const int m = 28;
@@ -18,22 +20,24 @@ namespace PacManLibrary
         private const int ghostapearY = 14;
         private IEventSink eventSink;
         private int iteration;
-        private BlinkiGhost blinkiGhost;
+        private GhostAbstract blinkiGhost;
         private CancellationTokenSource cancelTokenSource;
         private CancellationToken token;
         private List<IDisappearable> disappearables;
         private bool failed = false;
         private FoodEventHandler foodHandler;
 
-        public Game()
+        public Game(IGhostFactory ghostFactory, IGameContext gameContext)
         {
+            GameContext = gameContext;
+            this.ghostFactory = ghostFactory;
             Initialize(true);
         }
 
         public GameStat GameStat { get; private set; } = GameStat.Await;
         public PacMan PacMan { get; private set; }
         public IPoint[,] Border { get; private set; }
-        public GameContext GameContext { get; set; }
+        public IGameContext GameContext { get; set; }
         public List<IEnemy> Enemies { get; private set; }
 
         public void Restart()
@@ -57,7 +61,7 @@ namespace PacManLibrary
                     return;
                 }
                 iteration++;
-                AddGhost(failed);
+                AddGhost();
                 try
                 {
                     PacMan.Move();
@@ -102,23 +106,13 @@ namespace PacManLibrary
             Initialize(false);
         }
 
-        private void AddGhost(bool failed)
+        private void AddGhost()
         {
             if (iteration == 100)
             {
                 PinkiGhost pinkiGhost = new PinkiGhost(GameContext) { X = ghostapearX, Y = ghostapearX };
                 Enemies.Add(pinkiGhost);
             }
-            /*if (failed && iteration == 200)
-            {
-                InkiGhost inkiGhost = new InkiGhost(GameContext) { X = ghostapearX, Y = ghostapearX };
-                Enemies.Add(inkiGhost);
-            }
-            if (failed && iteration == 300)
-            {
-                ClaydGhost claydGhost = new ClaydGhost(GameContext) { X = ghostapearX, Y = ghostapearX };
-                Enemies.Add(claydGhost);
-            }*/
         }
 
         private void Initialize(bool initializing, float score = 0, int lifes = 3)
@@ -155,9 +149,9 @@ namespace PacManLibrary
             }
             disappearables = new List<IDisappearable>();
             Enemies = new List<IEnemy>();
-            GameContext = new GameContext { Map = Border, PacMan = PacMan, Enemies = Enemies, EventSink = eventSink, Disappearables = disappearables };
+            this.InitContext();
             foodHandler = new FoodEventHandler(GameContext);
-            blinkiGhost = new BlinkiGhost(GameContext) { X = ghostapearX, Y = ghostapearY };
+            blinkiGhost = this.ghostFactory.GetGhost(Ghost.Blinki);
             eventSink.Subscribe<FoodEated>(foodHandler.Execute);
             PacMan.SetDirection(Direction.Left);
             Border[14, 14] = blinkiGhost;
@@ -171,6 +165,15 @@ namespace PacManLibrary
             System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deep\source\repos\PacMan\PacManLibrary\Stuff\logs.txt", true);
             file.WriteLine(DateTime.Now.ToString() + " " + lines);
             file.Close();
+        }
+
+        private void InitContext()
+        {
+            this.GameContext.Map = Border;
+            this.GameContext.PacMan = PacMan;
+            this.GameContext.Enemies = Enemies;
+            this.GameContext.EventSink = eventSink;
+            this.GameContext.Disappearables = disappearables;
         }
     }
 }

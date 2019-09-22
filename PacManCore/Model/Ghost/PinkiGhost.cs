@@ -10,7 +10,7 @@ namespace PacManLibrary.Model
         private int normalSpeed = 3;
         private const int homeY = 1;
 
-        public PinkiGhost(GameContext context)
+        public PinkiGhost(IGameContext context)
             : base(context)
         {
             HomePoint.X = homeX;

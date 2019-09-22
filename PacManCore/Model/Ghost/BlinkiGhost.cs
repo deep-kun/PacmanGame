@@ -11,7 +11,7 @@ namespace PacManLibrary.Model
         private const int homeY = 26;
         private int normalSpeed = 2;
 
-        public BlinkiGhost(GameContext context)
+        public BlinkiGhost(IGameContext context)
             :base(context)
         {
             HomePoint.X = homeX;

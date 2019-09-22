@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PacManLibrary
 {
-    public class GameContext
+    public class GameContext : IGameContext
     {
         public IPoint[,] Map { get; set; }
         public ICharacter PacMan { get; set; }

@@ -13,7 +13,7 @@ namespace PacManLibrary.Model
         private readonly IEnemy blinki;
         private int normalSpeed = 3;
         
-        public InkiGhost(GameContext context)
+        public InkiGhost(IGameContext context)
             : base(context)
         {
             HomePoint.X = homeX;

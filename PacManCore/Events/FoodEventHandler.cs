@@ -13,9 +13,9 @@ namespace PacManLibrary.Events
         private const int poinToApearClayd = 80;
         private int pointEated = 0;
 
-        private readonly GameContext context;
+        private readonly IGameContext context;
 
-        public FoodEventHandler(GameContext context)
+        public FoodEventHandler(IGameContext context)
         {
             this.context = context;
         }
