@@ -34,7 +34,7 @@ namespace PacManWeb
             builder =>
             {
                 builder.AllowAnyMethod().AllowAnyHeader()
-                       .WithOrigins("http://localhost:55830")
+                       .WithOrigins("https://localhost:44349")
                        .AllowCredentials();
             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
