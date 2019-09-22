@@ -14,7 +14,7 @@ namespace PacManWeb
         {
             services.AddSingleton<GameServies>();
             services.AddTransient<Game>();
-            services.AddSignalR();
+            services.AddSignalR(s => s.EnableDetailedErrors = true);
             services.AddOptions();
             services.AddTransient<GameHub>();
             services.AddTransient<IGhostFactory, GhostFactory>();
