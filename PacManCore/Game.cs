@@ -13,11 +13,6 @@ namespace PacManLibrary
     public class Game
     {
         private readonly IGhostFactory ghostFactory;
-        private const int iteratinAppearSpeedy = 10;
-        private const int n = 36;
-        private const int m = 28;
-        private const int ghostapearX = 14;
-        private const int ghostapearY = 14;
         private IEventSink eventSink;
         private int iteration;
         private GhostAbstract blinkiGhost;
