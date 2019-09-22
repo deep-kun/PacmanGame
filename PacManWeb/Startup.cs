@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PacManCore.Model.Ghost;
-using PacManLibrary;
 
 namespace PacManWeb
 {
@@ -27,19 +25,14 @@ namespace PacManWeb
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddSingleton<GameServies>();
-            services.AddTransient<Game>();
-            services.AddSignalR();
-            services.AddOptions();
-            services.AddTransient<GameHub>();
-            services.AddTransient<IGhostFactory, GhostFactory>();
-            services.AddScoped<IGameContext, GameContext>();
+
+            services.AddPacmanDependency();
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
             builder =>
             {
                 builder.AllowAnyMethod().AllowAnyHeader()
-                       .WithOrigins("https://localhost:44349")
+                       //.WithOrigins("https://localhost:44349")
                        .AllowCredentials();
             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

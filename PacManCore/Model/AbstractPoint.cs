@@ -26,10 +26,5 @@ namespace PacManLibrary.Model
         {
             return $" Actually  X={X} Y ={Y}";
         }
-
-        public AbstractPointAproximate AproximateLocation()
-        {
-            return new AbstractPointAproximate(X, Y);
-        }
     }
 }
