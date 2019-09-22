@@ -110,7 +110,7 @@ namespace PacManLibrary
         {
             if (iteration == 100)
             {
-                PinkiGhost pinkiGhost = new PinkiGhost(GameContext) { X = ghostapearX, Y = ghostapearX };
+                GhostAbstract pinkiGhost = this.ghostFactory.GetGhost(Ghost.Pinki);
                 Enemies.Add(pinkiGhost);
             }
         }
@@ -150,7 +150,7 @@ namespace PacManLibrary
             disappearables = new List<IDisappearable>();
             Enemies = new List<IEnemy>();
             this.InitContext();
-            foodHandler = new FoodEventHandler(GameContext);
+            foodHandler = new FoodEventHandler(GameContext, this.ghostFactory);
             blinkiGhost = this.ghostFactory.GetGhost(Ghost.Blinki);
             eventSink.Subscribe<FoodEated>(foodHandler.Execute);
             PacMan.SetDirection(Direction.Left);

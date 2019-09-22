@@ -70,9 +70,7 @@ namespace PacManLibrary.Model
                 dstX = character.X - deltaY;
                 dstY = character.Y;
             }
-            //Logger($"del X = {dstX} \t  del Y = {dstY}");
             return new AbstractPoint(dstX, dstY);
-            //return new AbstractPoint(character.X, character.Y);
         }
     }
 }

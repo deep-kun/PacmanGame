@@ -8,7 +8,7 @@ namespace PacManCore.Model.Ghost
 {
     public enum Ghost
     {
-        Blinki = 1,
+        Blinki,
         Pinki,
         Inki,
         Clayd
@@ -16,9 +16,6 @@ namespace PacManCore.Model.Ghost
 
     public class GhostFactory : IGhostFactory
     {
-        private const int ghostapearX = 14;
-        private const int ghostapearY = 14;
-
         private readonly IGameContext ghostContext;
 
         public GhostFactory(IGameContext ghostContext)
@@ -31,13 +28,13 @@ namespace PacManCore.Model.Ghost
             switch (ghost)
             {
                 case Ghost.Blinki:
-                    return new BlinkiGhost(this.ghostContext) { X = ghostapearX, Y = ghostapearY };
+                    return new BlinkiGhost(this.ghostContext);
                 case Ghost.Pinki:
-                    break;
+                    return new PinkiGhost(this.ghostContext);
                 case Ghost.Inki:
-                    break;
+                    return new InkiGhost(this.ghostContext);
                 case Ghost.Clayd:
-                    break;
+                    return new ClaydGhost(this.ghostContext);
                 default:
                     throw new ArgumentException(nameof(ghost));
             }

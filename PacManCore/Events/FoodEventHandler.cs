@@ -1,4 +1,5 @@
-﻿using PacManLibrary.Model;
+﻿using PacManCore.Model.Ghost;
+using PacManLibrary.Model;
 
 namespace PacManLibrary.Events
 {
@@ -6,18 +7,18 @@ namespace PacManLibrary.Events
     {
         private const int cherryApearX = 20;
         private const int cherryApearY = 14;
-        private const int ghostapearX = 14;
-        private const int ghostapearY = 14;
         private const int poinToApearInki = 30;
         private const int poinToApearChery = 70;
         private const int poinToApearClayd = 80;
         private int pointEated = 0;
 
         private readonly IGameContext context;
+        private readonly IGhostFactory ghostFactory;
 
-        public FoodEventHandler(IGameContext context)
+        public FoodEventHandler(IGameContext context, IGhostFactory ghostFactory)
         {
             this.context = context;
+            this.ghostFactory = ghostFactory;
         }
 
         public void Execute(FoodEated foodEated)
@@ -51,12 +52,12 @@ namespace PacManLibrary.Events
         }
         private void InvokeInki()
         {
-            InkiGhost inkiGhost = new InkiGhost(context) { X = ghostapearX, Y = ghostapearX };
+            GhostAbstract inkiGhost = this.ghostFactory.GetGhost(Ghost.Inki);
             context.Enemies.Add(inkiGhost);
         }
         private void InvokeClayd()
         {
-            ClaydGhost claydGhost = new ClaydGhost(context) { X = ghostapearX, Y = ghostapearX };
+            GhostAbstract claydGhost = this.ghostFactory.GetGhost(Ghost.Clayd);
             context.Enemies.Add(claydGhost);
         }
         private void CheckForFinal()

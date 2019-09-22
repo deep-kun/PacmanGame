@@ -3,6 +3,7 @@ using PacManLibrary.Events;
 using PacManLibrary.Interfaces;
 using PacManLibrary.Algorithms;
 using System.Timers;
+using PacManCore;
 
 namespace PacManLibrary.Model
 {
@@ -32,6 +33,8 @@ namespace PacManLibrary.Model
             this.character = context.PacMan;
             this.map = context.Map;
             this.eventSink = context.EventSink;
+            this.X = GameConstants.GhostapearX;
+            this.Y = GameConstants.GhostapearY;
         }
 
         public double R { get; } = 0.8;
