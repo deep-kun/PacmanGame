@@ -13,7 +13,7 @@ namespace PacManWeb
         private Game game;
         private Guid guid;
 
-        public GameHub(GameServies gameServies, Game newGame)
+        public GameHub(IGameServies gameServies, Game newGame)
         {
             this.newGame = newGame;
             games = gameServies.Games;

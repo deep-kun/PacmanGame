@@ -7,8 +7,8 @@ namespace PacManWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly GameServies gameServies;
-        public HomeController(GameServies gameServies)
+        private readonly IGameServies gameServies;
+        public HomeController(IGameServies gameServies)
         {
             this.gameServies = gameServies;
         }

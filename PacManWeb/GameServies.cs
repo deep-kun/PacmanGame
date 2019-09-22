@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace PacManWeb
 {
-    public class GameServies
+    public class GameServies : IGameServies
     {
-        public  Dictionary<Guid, Game> Games { get; set; } = new Dictionary<Guid, Game>();
+        public Dictionary<Guid, Game> Games { get; private set; } = new Dictionary<Guid, Game>();
     }
 }

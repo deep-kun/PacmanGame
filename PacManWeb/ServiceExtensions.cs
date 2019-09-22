@@ -12,7 +12,7 @@ namespace PacManWeb
     {
         public static void AddPacmanDependency(this IServiceCollection services)
         {
-            services.AddSingleton<GameServies>();
+            services.AddSingleton<IGameServies, GameServies>();
             services.AddTransient<Game>();
             services.AddSignalR(s => s.EnableDetailedErrors = true);
             services.AddOptions();

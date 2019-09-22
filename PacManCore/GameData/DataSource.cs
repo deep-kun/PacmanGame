@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace PacManLibrary
 {
@@ -9,7 +11,17 @@ namespace PacManLibrary
 
         public char[,] GetMap(string path)
         {
-            string map = File.ReadAllText(path);
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            const string NAME = @"PacManCore.Stuff.map.txt";
+            string map;
+            using (Stream stream = executingAssembly.GetManifestResourceStream(NAME))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    map = reader.ReadToEnd();
+                }
+            }
+
             char[,] charArray = new char[n, m];
             var lines = map.Split(new[] { '\n' });
             int row = 0;

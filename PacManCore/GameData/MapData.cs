@@ -1,17 +1,21 @@
-﻿using PacManLibrary.Interfaces;
+﻿using System.IO;
+using System.Reflection;
+using System.Runtime.Versioning;
+using PacManLibrary.Interfaces;
 using PacManLibrary.Model;
 
 namespace PacManLibrary.GameData
 {
     public class MapData
     {
+        private string path = @"..\PacManCore\Stuff\map.txt";
         private const int n = 36;
         private const int m = 28;
         public IPoint[,] InitializateMap()
         {
             IPoint[,] map = new IPoint[n, m];
             int k = 0;
-            var charArray = new DataSource().GetMap(@"C:\Users\deep\source\repos\PacMan\PacManCore\Stuff\map.txt");
+            var charArray = new DataSource().GetMap(path);
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
