@@ -6,9 +6,6 @@ namespace PacManLibrary.Model
 {
     public class PacMan : IPacMan
     {
-        private const int thirtyPoint = 30;
-        private const int sevebtyPoint = 70;
-        private const int eightyPoint = 80;
         private const double k = 0.2;
         private double x = 0;
         private double y = 0;

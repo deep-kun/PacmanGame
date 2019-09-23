@@ -19,7 +19,6 @@ namespace PacManLibrary
         private CancellationTokenSource cancelTokenSource;
         private CancellationToken token;
         private List<IDisappearable> disappearables;
-        private bool failed = false;
         private FoodEventHandler foodHandler;
 
         public Game(IGhostFactory ghostFactory, IGameContext gameContext)
@@ -55,8 +54,11 @@ namespace PacManLibrary
                 {
                     return;
                 }
+
                 iteration++;
+
                 AddGhost();
+
                 try
                 {
                     PacMan.Move();
@@ -65,6 +67,7 @@ namespace PacManLibrary
                 {
                     Logger(e.ToString());
                 }
+
                 foreach (GhostAbstract item in Enemies)
                 {
                     try
@@ -124,7 +127,6 @@ namespace PacManLibrary
             else
             {
                 GameStat = GameStat.AwaitAfterDeath;
-                failed = true;
                 Border[PacMan.X, PacMan.Y] = new EatedFood() { IsChoosable = PacMan.OnWayChosser };
                 PacMan.EventSink = eventSink;
                 foreach (GhostAbstract item in Enemies)
