@@ -6,6 +6,6 @@ namespace PacManWeb
 {
     public class GameServies : IGameServies
     {
-        public Dictionary<Guid, Game> Games { get; private set; } = new Dictionary<Guid, Game>();
+        public Dictionary<Guid, IGame> Games { get; private set; } = new Dictionary<Guid, IGame>();
     }
 }

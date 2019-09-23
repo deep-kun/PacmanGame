@@ -10,7 +10,7 @@ using PacManLibrary.GameData;
 
 namespace PacManLibrary
 {
-    public class Game
+    public class Game : IGame
     {
         private readonly IGhostFactory ghostFactory;
         private IEventSink eventSink;
@@ -153,7 +153,7 @@ namespace PacManLibrary
             Enemies.Add(blinkiGhost);
         }
 
-        
+
         public void Logger(string lines)
         {
             Console.Beep();

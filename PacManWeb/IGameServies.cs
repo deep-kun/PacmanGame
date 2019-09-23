@@ -6,6 +6,6 @@ namespace PacManWeb
 {
     public interface IGameServies
     {
-        Dictionary<Guid, Game> Games { get; }
+        Dictionary<Guid, IGame> Games { get; }
     }
 }

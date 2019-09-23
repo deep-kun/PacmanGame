@@ -9,16 +9,16 @@ namespace PacManWeb
 {
     public class GameHub : Hub
     {
-        private readonly Game newGame;
-        private Game game;
+        private readonly IGame newGame;
+        private IGame game;
         private Guid guid;
 
-        public GameHub(IGameServies gameServies, Game newGame)
+        public GameHub(IGameServies gameServies, IGame newGame)
         {
             this.newGame = newGame;
             games = gameServies.Games;
         }
-        private readonly Dictionary<Guid, Game> games;
+        private readonly Dictionary<Guid, IGame> games;
         
         public async Task RequestData(string id)
         {
