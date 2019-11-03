@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using PacaManDataAccessLayer;
 using PacManCore.Model.Ghost;
 using PacManLibrary;
 
@@ -13,7 +14,8 @@ namespace PacManWeb
         public static void AddPacmanDependency(this IServiceCollection services)
         {
             services.AddSingleton<IGameServies, GameServies>();
-            services.AddTransient<IGame,Game>();
+            services.AddSingleton<IHighScoreRepository, HighScoreInMemoryRepository>();
+            services.AddTransient<IGame, Game>();
             services.AddSignalR(s => s.EnableDetailedErrors = true);
             services.AddOptions();
             services.AddTransient<GameHub>();

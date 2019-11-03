@@ -26,8 +26,8 @@ connection.on("ReceiveData", (tmp) => {
     var node = document.getElementById("lives");
     node.innerHTML = tmp.lives;
     if (tmp.gameStat == 3) {
-        document.location.reload();
-    }
+        window.location.href = "\RecordScore?id=" + guid;
+        }
     for (var i = 0; i < map[0].length; i++) {
         for (var j = 0; j < map.length; j++) {
             if (map[j][i] == '█') {
