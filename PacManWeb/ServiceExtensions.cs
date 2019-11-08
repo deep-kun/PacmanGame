@@ -16,7 +16,10 @@ namespace PacManWeb
             services.AddSingleton<IGameServies, GameServies>();
             services.AddSingleton<IHighScoreRepository, HighScoreInMemoryRepository>();
             services.AddTransient<IGame, Game>();
-            services.AddSignalR(s => s.EnableDetailedErrors = true);
+            services.AddSignalR(s => s.EnableDetailedErrors = true).AddJsonProtocol(options =>
+            {
+                options.PayloadSerializerOptions.WriteIndented = false;
+            });
             services.AddOptions();
             services.AddTransient<GameHub>();
             services.AddTransient<IGhostFactory, GhostFactory>();

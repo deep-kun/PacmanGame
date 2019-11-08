@@ -32,10 +32,10 @@ namespace PacManWeb
             builder =>
             {
                 builder.AllowAnyMethod().AllowAnyHeader()
-                       //.WithOrigins("https://localhost:44349")
                        .AllowCredentials();
             }));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,15 +55,14 @@ namespace PacManWeb
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseCors("CorsPolicy");
-            app.UseSignalR(routes =>
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapHub<GameHub>("/gamehub");
-            });
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<GameHub>("/gamehub");
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }
