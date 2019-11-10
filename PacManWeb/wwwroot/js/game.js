@@ -1,10 +1,6 @@
-﻿//import * as signalR from "@aspnet/signalr"
-
+﻿
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/gameHub")
-    //.AddJsonProtocol(options => {
-    //    options.PayloadSerializerOptions.WriteIndented = false;
-    //})
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
@@ -134,3 +130,4 @@ function refresh() {
 
 
 connection.start().catch(err => console.error(err.toString()));
+
