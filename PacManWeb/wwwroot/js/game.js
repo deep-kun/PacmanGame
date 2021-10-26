@@ -1,7 +1,7 @@
 ﻿
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/gameHub")
-    .configureLogging(signalR.LogLevel.Information)
+    .configureLogging(signalR.LogLevel.Debug)
     .build();
 
 var canvas = document.getElementById("canvas");
@@ -11,6 +11,7 @@ ctx.canvas.height = window.innerHeight;
 var s = 21;
 var guid = 0;
 connection.on("ReceiveData", (tmp) => {
+    console.log(tmp);
     if (tmp.gameStat) {
         document.getElementById("k").style.visibility = "hidden";
     }
@@ -130,4 +131,4 @@ function refresh() {
 
 
 connection.start().catch(err => console.error(err.toString()));
-
+console.log("cons tart");

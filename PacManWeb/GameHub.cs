@@ -17,7 +17,7 @@ namespace PacManWeb
         {
             this.newGame = newGame;
             games = gameServies.Games;
-        }
+        }   
         private readonly Dictionary<Guid, IGame> games;
         
         public async Task RequestData(string id)

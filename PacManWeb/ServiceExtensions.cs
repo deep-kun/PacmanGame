@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PacaManDataAccessLayer;
 using PacManCore.Model.Ghost;
+using Microsoft.AspNetCore.SignalR;
 using PacManLibrary;
 
 namespace PacManWeb
@@ -16,9 +13,9 @@ namespace PacManWeb
             services.AddSingleton<IGameServies, GameServies>();
             services.AddSingleton<IHighScoreRepository, HighScoreInMemoryRepository>();
             services.AddTransient<IGame, Game>();
-            services.AddSignalR(s => s.EnableDetailedErrors = true);
+            services.AddSignalR(s => { s.EnableDetailedErrors = true;}).AddNewtonsoftJsonProtocol(); ;
             services.AddOptions();
-            services.AddTransient<GameHub>();
+            services.AddTransient<Hub, GameHub>();
             services.AddTransient<IGhostFactory, GhostFactory>();
             services.AddScoped<IGameContext, GameContext>();
         }
